@@ -4,7 +4,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isoft.api.models.PokemonResponse;
+import com.isoft.api.models.WeakPokemonDTO;
 import com.isoft.api.service.ApiService;
+
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +34,10 @@ public class PokeController {
         Modificar los endpoint mas tarde a los que corespondan
     */
     @GetMapping("/weak-defense")
-    public String getWeekDefense(@PathVariable String param) {
-        return new String();
+    public ResponseEntity<List<WeakPokemonDTO>> getWeekDefense() {
+        List<WeakPokemonDTO> response = service.listaDebiles();
+        if (response == null) { return new ResponseEntity<>(HttpStatus.NO_CONTENT); }
+        return ResponseEntity.ok(response);
     }
     
     @GetMapping("/type-dominance/{type}")
