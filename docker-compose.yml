@@ -1,0 +1,14 @@
+services:
+  backend: 
+    build: .
+    container_name: poke_api
+    ports:
+      - "${APP_PORT:-3001}:${APP_PORT:-3001}"
+    env_file:
+      - .env
+    networks:
+      - api_network
+
+networks:
+  api_network:
+    driver: bridge
